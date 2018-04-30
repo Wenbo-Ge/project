@@ -14,7 +14,6 @@ require_once('database-shop.php');
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>SHOP</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style type="text/css">
     	.card-text{
     		text-align: center;
@@ -51,7 +50,7 @@ require_once('database-shop.php');
                   ?></p>
               <div class="text-right">
               
-                <button class="btn btn-success" onclick="addPrice('<?php echo $value->getPrice();?>')">Purchase</button>
+                <button class="btn btn-success add" onclick="addPrice('<?php echo $value->getPrice();?>')">Purchase</button>
 
               </div>
               
@@ -77,20 +76,21 @@ require_once('database-shop.php');
 <button class="btn btn-primary submit" style="position:fixed; right: 2rem; bottom: 0.5rem; border-radius: 1rem" onclick="submitTotal()">Submit</button>
 
 <script type="text/javascript">
-// 什么时候用$(document).ready(function(){})?????
 
 
-  // 定义了price
+
+  
   function addPrice(price){
-    // 用console来测试
-    // 这里使用了price
-    // console.log(price);
-    // text抓取数据，html可以加东西，val用在input里
-    // .html('<h1>ni hao</h>');
+    
     var current_price=$('.TotalPrice').text();
-    // parseInt将字符变成整数，
-    // parseFloat将字符变成数。
+    console.log(value);
+    var value = $('.add').text();
     $('.TotalPrice').text((parseFloat(current_price)+parseFloat(price)).toFixed(2));
+     if (value='') {
+            $(this).attr('disabled', false);
+          } else {
+            $(this).attr('disabled', true);
+          }
   }
 
   function submitTotal(){
