@@ -47,10 +47,11 @@ require_once('database-shop.php');
                   ?></p>
               <p class="card-text"><?php
                   echo $value->getPrice();
-                  ?></p>
+                  ?> CAD</p>
+                  <!-- &nbsp -->
               <div class="text-right">
               
-                <button class="btn btn-success add" onclick="addPrice('<?php echo $value->getPrice();?>')">Purchase</button>
+                <button class="btn btn-success add" onclick="addPrice(this,'<?php echo $value->getPrice();?>')">Purchase</button>
 
               </div>
               
@@ -80,17 +81,14 @@ require_once('database-shop.php');
 
 
   
-  function addPrice(price){
+  function addPrice(ref,price){
     
     var current_price=$('.TotalPrice').text();
-    console.log(value);
-    var value = $('.add').text();
+    
+    // var value = $('.add').text();
+    console.log(parseFloat(price));
     $('.TotalPrice').text((parseFloat(current_price)+parseFloat(price)).toFixed(2));
-     if (value='') {
-            $(this).attr('disabled', false);
-          } else {
-            $(this).attr('disabled', true);
-          }
+    $(ref).attr('disabled', true);
   }
 
   function submitTotal(){
@@ -99,7 +97,7 @@ require_once('database-shop.php');
     $.ajax({
       url:'ajax.php',
       type:'POST',
-      data:{submitInfo:submit},
+      data:{submitTotal:submit},
       dataType:'json',
       success: function(data){
         alert(data.res);
