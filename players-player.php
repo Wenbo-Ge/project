@@ -14,11 +14,13 @@ class Players {
 	private $name;
 	private $image_url;
 	private $jerseyNumber;
+	private $description;
 
-	function __construct($name='',$image_url='',$jerseyNumber=''){
+	function __construct($name='',$image_url='',$jerseyNumber='',$description=''){
 		$this->name=$name;
 		$this->image_url=$image_url;
 		$this->jerseyNumber=$jerseyNumber;
+		$this->description=$description;
 	}
 	// 把dbdata传给对象（item object）
 	public function arrayAdapter ($row){
@@ -26,6 +28,7 @@ class Players {
 		$this->name=$row['name'];
 		$this->image_url=$row['url'];
 		$this->jerseyNumber=$row['jerseyNumber'];
+		$this->description=$row['description'];
 		return $this;
 	}
 
@@ -60,6 +63,14 @@ class Players {
 	}
 	public function setJerseyNumber($jerseyNumber){
 		$this->jerseyNumber=$jerseyNumber;
+		return $this;
+	}
+
+	public function getDescription(){
+		return $this->description;
+	}
+	public function setDescription($description){
+		$this->description=$description;
 		return $this;
 	}
 }
