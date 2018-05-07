@@ -10,10 +10,10 @@
 
     <link href="style.css" rel="stylesheet" type="text/css"/>
 
-    <title>Player Document</title>
+    <title>Profile</title>
   </head>
   <body>
-    <h1>Player Document</h1>
+    
 
 
     
@@ -33,6 +33,7 @@
 			    while($row = $stmt->fetch()){
 					
 		?>
+				<h1>Profile of <?php echo $row['name'] ?></h1>
 				<div class="card col-md-3 col-sm-6 col-12">
 				  <img class="card-img-top" src="<?php echo $row['url'] ?>">
 				  <div class="card-body">
