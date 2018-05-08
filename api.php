@@ -26,28 +26,34 @@
 		{
 			$jerseyNumber=$_REQUEST['jerseyNumber'];
 			try{
-				$conn = new PDO("mysql:host=localhost;dbname=BarcaShop", "root", "root");
+				$conn = new PDO("mysql:host=localhost;dbname=BarcaShop;charset=utf8mb4", "root", "root");
+
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$stmt = $conn->prepare("SELECT * FROM Players where jerseyNumber=$jerseyNumber"); 
 			    $stmt->execute();
-			    while($row = $stmt->fetch()){
-					
-		?>
-				<h1>Profile of <?php echo $row['name'] ?></h1>
-				<div class="card col-md-3 col-sm-6 col-12">
-				  <img class="card-img-top" src="<?php echo $row['url'] ?>">
-				  <div class="card-body">
-				  	<h5 class="card-title"><?php echo $row['name'] ?> </h5>
-				    <p class="card-text"><?echo $row['description'] ?></p>
-				  </div>
-				</div>
-		<?php 
-				}
+			    if($stmt->rowCount()==0){
+			    	echo "No player is currently wearing this jersey, try another number!";
+			    }else{
+					 while($row = $stmt->fetch()){
+								    	
+								    	?>
+											<h1>Profile of <?php echo $row['name'] ?></h1>
+											<div class="card col-md-3 col-sm-6 col-12">
+											  <img class="card-img-top" src="<?php echo $row['url'] ?>">
+											  <div class="card-body">
+											  	<h5 class="card-title"><?php echo $row['name'] ?> </h5>
+											    <p class="card-text"><?php echo $row['description'] ?></p>
+											  </div>
+											</div>
+				<?php 
+												}
+			   	 }
+			   
 			}catch(PDOException $e){
 				echo "Connection failed: " . $e->getMessage();
 			}
 		}else{
-			echo "No player is currently wearing this jersey, try another number!";
+			echo "Check API document!";
 		}
 
 
