@@ -1,4 +1,5 @@
 RewriteEngine On		# Turn on the rewriting engine
 
+#注意路径的写法
 RewriteRule ^api/search/([0-9]*)$ api.php?action=search&jerseyNumber=$1 [NC,L]
 RewriteRule ^api_ajax/search/([0-9]*)$ api_ajax.php?action=search&jerseyNumber=$1 [NC,L]
